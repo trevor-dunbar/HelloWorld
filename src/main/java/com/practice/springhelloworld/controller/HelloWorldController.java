@@ -13,18 +13,22 @@ public class HelloWorldController {
     private static final Logger log = LoggerFactory.getLogger(HelloWorldController.class);
 
     @GetMapping("/hello")
-    public String helloWorld() throws InterruptedException {
+    public String helloWorld() {
         try {
-            for (int i = 1; i < 10; i++) {
-                TimeUnit.SECONDS.sleep(1);
-                log.info(String.valueOf(i));
-            }
-
-            log.info("complete");
+            simulateDelay();
             return "Hello world";
         } catch (Exception e) {
             log.error(e.getMessage());
             return "Something went wrong";
         }
+    }
+
+    public void simulateDelay() throws InterruptedException {
+        for (int i = 1; i <= 10; i++) {
+            TimeUnit.SECONDS.sleep(1);
+            log.info(String.valueOf(i));
+        }
+
+        log.info("complete");
     }
 }
